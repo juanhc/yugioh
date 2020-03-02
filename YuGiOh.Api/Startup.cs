@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using YuGiOh.Api.Configuration;
+using YuGiOh.Infraestructure;
 
 namespace YuGiOh.Api
 {
@@ -27,6 +22,11 @@ namespace YuGiOh.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("CardsDatabase"));
+            });
 
             services.ConfigureApplicationServices();
         }
@@ -49,6 +49,12 @@ namespace YuGiOh.Api
             {
                 endpoints.MapControllers();
             });
+
+            using var scope = app.ApplicationServices.CreateScope();
+
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            context.Database.Migrate();
         }
     }
 }

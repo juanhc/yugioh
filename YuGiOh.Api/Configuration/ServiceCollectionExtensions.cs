@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Http;
 using Polly;
+using MediatR;
 
 namespace YuGiOh.Api.Configuration
 {
@@ -12,6 +9,8 @@ namespace YuGiOh.Api.Configuration
     {
         public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
+            services.AddMediatR(typeof(Startup).Assembly);
+
             services.AddTransient<HttpClientLoggingHandler>();
 
             services.AddHttpClient<YuGiOhApiClient>()

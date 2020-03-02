@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace YuGiOh.Domain
 {
     public class CardSet
     {
+        public int Id { get; set; }
         public string SetName { get; set; }
         public string SetCode { get; set; }
         public string SetRarity { get; set; }
@@ -20,6 +20,7 @@ namespace YuGiOh.Domain
 
     public class CardPrice
     {
+        public int Id { get; set; }
         public string CardmarketPrice { get; set; }
         public string TcgplayerPrice { get; set; }
         public string EbayPrice { get; set; }
@@ -28,6 +29,13 @@ namespace YuGiOh.Domain
 
     public class Card
     {
+        public Card()
+        {
+            CardSets = new List<CardSet>();
+            CardImages = new List<CardImage>();
+            CardPrices = new List<CardPrice>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }

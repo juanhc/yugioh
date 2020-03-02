@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuGiOh.Api", "YuGiOh.Api\YuGiOh.Api.csproj", "{45F1E280-5428-4497-B737-4DF52FD8B2FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuGiOh.Api", "YuGiOh.Api\YuGiOh.Api.csproj", "{45F1E280-5428-4497-B737-4DF52FD8B2FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuGiOh.Domain", "YuGiOh.Domain\YuGiOh.Domain.csproj", "{2CC1026B-4E15-4FCD-AB77-701FD9BF7F9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuGiOh.Domain", "YuGiOh.Domain\YuGiOh.Domain.csproj", "{2CC1026B-4E15-4FCD-AB77-701FD9BF7F9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuGiOh.Infraestructure", "YuGiOh.Infraestructure\YuGiOh.Infraestructure.csproj", "{DE12C7CC-CD2A-46E9-8A4C-31E38A4F3B71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2CC1026B-4E15-4FCD-AB77-701FD9BF7F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CC1026B-4E15-4FCD-AB77-701FD9BF7F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CC1026B-4E15-4FCD-AB77-701FD9BF7F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE12C7CC-CD2A-46E9-8A4C-31E38A4F3B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE12C7CC-CD2A-46E9-8A4C-31E38A4F3B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE12C7CC-CD2A-46E9-8A4C-31E38A4F3B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE12C7CC-CD2A-46E9-8A4C-31E38A4F3B71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
