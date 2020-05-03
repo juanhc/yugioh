@@ -10,5 +10,8 @@ namespace YuGiOh.Infraestructure
         { }
 
         public DbSet<Card> Cards { get; set; }
+        public DbSet<CardImage> CardImages { get; set; }
+        public DbSet<CardPrice> CardPrices { get; set; }
+        public DbSet<CardSet> CardSets { get; set; }
     }
 }

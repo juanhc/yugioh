@@ -1,77 +1,77 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace YuGiOh.Api.Dto
 {
     public class CardDtoSet
     {
-        [JsonProperty("set_name")]
+        [JsonPropertyName("set_name")]
         public string SetName { get; set; }
 
-        [JsonProperty("set_code")]
+        [JsonPropertyName("set_code")]
         public string SetCode { get; set; }
 
-        [JsonProperty("set_rarity")]
+        [JsonPropertyName("set_rarity")]
         public string SetRarity { get; set; }
 
-        [JsonProperty("set_price")]
+        [JsonPropertyName("set_price")]
         public string SetPrice { get; set; }
     }
 
     public class CardDtoImage
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("image_url")]
+        [JsonPropertyName("image_url")]
         public string ImageUrl { get; set; }
 
-        [JsonProperty("image_url_small")]
+        [JsonPropertyName("image_url_small")]
         public string ImageUrlSmall { get; set; }
     }
 
     public class CardDtoPrice
     {
-        [JsonProperty("cardmarket_price")]
+        [JsonPropertyName("cardmarket_price")]
         public string CardmarketPrice { get; set; }
 
-        [JsonProperty("tcgplayer_price")]
+        [JsonPropertyName("tcgplayer_price")]
         public string TcgplayerPrice { get; set; }
 
-        [JsonProperty("ebay_price")]
+        [JsonPropertyName("ebay_price")]
         public string EbayPrice { get; set; }
 
-        [JsonProperty("amazon_price")]
+        [JsonPropertyName("amazon_price")]
         public string AmazonPrice { get; set; }
     }
 
     public class CardDto
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty("desc")]
+        [JsonPropertyName("desc")]
         public string Desc { get; set; }
 
-        [JsonProperty("race")]
+        [JsonPropertyName("race")]
         public string Race { get; set; }
 
-        [JsonProperty("archetype")]
+        [JsonPropertyName("archetype")]
         public string Archetype { get; set; }
 
-        [JsonProperty("card_sets")]
+        [JsonPropertyName("card_sets")]
         public IList<CardDtoSet> CardSets { get; set; }
 
-        [JsonProperty("card_images")]
+        [JsonPropertyName("card_images")]
         public IList<CardDtoImage> CardImages { get; set; }
 
-        [JsonProperty("card_prices")]
+        [JsonPropertyName("card_prices")]
         public IList<CardDtoPrice> CardPrices { get; set; }
     }
 }

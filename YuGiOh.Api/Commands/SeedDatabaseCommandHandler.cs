@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -30,62 +31,26 @@ namespace YuGiOh.Api.Commands
         {
             try
             {
-                var cardDtoList = await _http.GetCards();
+                var cardDtoList = await _http.GetCards<IEnumerable<CardDto>>();
 
-                _context.Cards.RemoveRange(_context.Cards);
+                var cards = _context.Cards
+                    .Include(x => x.CardImages)
+                    .Include(x => x.CardPrices)
+                    .Include(x => x.CardSets);
+
+                _context.Cards.RemoveRange(cards);
 
                 var configuration = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<CardDto, Card>()
-                    .Ignore(x => x.CardSets)
-                    .Ignore(x => x.CardImages)
-                    .Ignore(x => x.CardPrices);
-
-                    cfg.CreateMap<CardDtoPrice, CardPrice>();
-                    cfg.CreateMap<CardDtoImage, CardImage>();
-                    cfg.CreateMap<CardDtoSet, CardSet>();
+                    cfg.CreateMap<CardDto, Card>().ForMember(card => card.OriginalId, cardDto => cardDto.MapFrom(c => c.Id)).Ignore(c => c.Id);
+                    cfg.CreateMap<CardDtoPrice, CardPrice>().Ignore(c => c.Id);
+                    cfg.CreateMap<CardDtoImage, CardImage>().Ignore(c => c.Id);
+                    cfg.CreateMap<CardDtoSet, CardSet>().Ignore(c => c.Id);
                 });
 
                 var mapper = configuration.CreateMapper();
 
-                List<Card> cardList = new List<Card>();
-
-                foreach (var cardDto in cardDtoList)
-                {
-                    Card card = mapper.Map<Card>(cardDto);
-
-                    card.Id = 0;
-
-                    if(cardDto.CardSets != null)
-                    {
-                        foreach (var cardSetDto in cardDto.CardSets)
-                        {
-                            card.CardSets.Add(mapper.Map<CardSet>(cardSetDto));
-                        }
-                    }
-
-                    if (cardDto.CardImages != null)
-                    {
-                        foreach (var cardImageDto in cardDto.CardImages)
-                        {
-                            var cardImage = mapper.Map<CardImage>(cardImageDto);
-
-                            cardImage.Id = 0;
-
-                            card.CardImages.Add(cardImage);
-                        }
-                    }
-
-                    if (cardDto.CardPrices != null)
-                    {
-                        foreach (var cardPriceDto in cardDto.CardPrices)
-                        {
-                            card.CardPrices.Add(mapper.Map<CardPrice>(cardPriceDto));
-                        }
-                    }
-
-                    cardList.Add(card);
-                }
+                var cardList = mapper.Map<IEnumerable<Card>>(cardDtoList);
 
                 await _context.Cards.AddRangeAsync(cardList);
 

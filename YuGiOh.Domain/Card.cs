@@ -9,6 +9,8 @@ namespace YuGiOh.Domain
         public string SetCode { get; set; }
         public string SetRarity { get; set; }
         public string SetPrice { get; set; }
+        public Card Card { get; set; }
+        public int CardId { get; set; }
     }
 
     public class CardImage
@@ -16,6 +18,8 @@ namespace YuGiOh.Domain
         public int Id { get; set; }
         public string ImageUrl { get; set; }
         public string ImageUrlSmall { get; set; }
+        public Card Card { get; set; }
+        public int CardId { get; set; }
     }
 
     public class CardPrice
@@ -25,18 +29,14 @@ namespace YuGiOh.Domain
         public string TcgplayerPrice { get; set; }
         public string EbayPrice { get; set; }
         public string AmazonPrice { get; set; }
+        public Card Card { get; set; }
+        public int CardId { get; set; }
     }
 
     public class Card
     {
-        public Card()
-        {
-            CardSets = new List<CardSet>();
-            CardImages = new List<CardImage>();
-            CardPrices = new List<CardPrice>();
-        }
-
         public int Id { get; set; }
+        public int OriginalId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Desc { get; set; }

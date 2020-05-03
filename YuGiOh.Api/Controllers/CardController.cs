@@ -15,11 +15,11 @@ namespace YuGiOh.Api.Controllers
         public CardController(YuGiOhApiClient http) => _http = http;
 
         [Route("")]
-        public async Task<ActionResult<IEnumerable<CardDto>>> GetAllCardsAsync(int count)
+        public async Task<ActionResult<IEnumerable<CardDto>>> GetAllCardsAsync()
         {
             try
             {
-                var response = await _http.GetCards();
+                var response = await _http.GetCards<IEnumerable<CardDto>>();
 
                 return Ok(response);
             }

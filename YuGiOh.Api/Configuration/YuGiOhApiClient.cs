@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
-using YuGiOh.Api.Dto;
 
 namespace YuGiOh.Api.Configuration
 {
@@ -13,7 +11,7 @@ namespace YuGiOh.Api.Configuration
         public YuGiOhApiClient(HttpClient http)
             => _http = http;
 
-        public async Task<IEnumerable<CardDto>> GetCards()
+        public async Task<T> GetCards<T>()
         {
             var request = new HttpRequestMessage(HttpMethod.Get,
             "https://db.ygoprodeck.com/api/v6/cardinfo.php");
@@ -22,7 +20,7 @@ namespace YuGiOh.Api.Configuration
 
             var content = await result.Content.ReadAsStringAsync();
 
-            var cardList = JsonConvert.DeserializeObject<IEnumerable<CardDto>>(content);
+            var cardList = JsonSerializer.Deserialize<T>(content);
 
             return cardList;
         }
